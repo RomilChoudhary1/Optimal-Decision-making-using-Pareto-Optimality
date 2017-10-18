@@ -1,0 +1,89 @@
+program decisionTree
+   Open "cod.txt"
+   for each line
+       set i=0;
+       split line by ","
+          column(i) =word
+          i= i+1
+       set year=columns(0)
+       set age=columns(5)
+       set ed=columns(11)
+       set locality=columns(7)
+       set cod=columns(1)
+       set tree1 root1= agep
+       set tree1 root2= locality
+       set tree1 root3= cod
+       set tree2 root1= age
+       set tree2 root2= year
+       set tree2 root3= cod
+       set tree3 root1= locality
+       set tree3 root2= year
+       set tree3 root3= cod
+       set arr1=(Ap  && Lp && DP)
+       set arr2=(Ap  && Yp && DP)
+       set arr3=(Lp  && Yp && DP)
+   end for
+   for i=0 to len(arr1)
+       if arr1<arr3
+           p1=p1+1
+           c1=c1+1
+       else
+           p3=p3+1
+           c3=c3+1
+       end if
+       i=i+1
+  end for
+  if c1>c3
+       percent=(p1*100)/(p1+p3)
+        v=1
+        print "C1 beats C3 by "  percent "%"
+        p1=0
+        l=1
+        c1=0
+        for i=0 to len(arr2)
+            if arr1<arr2
+               p1=p1+1
+               c1=c1+1
+           else
+               p2=p2+1
+               c2=c2+1
+            end if
+            i=i+1
+       end for
+  else
+        percent=(p3*100)/(p1+p3)
+        v=3
+        print "C3 beats C1 by "  percent "%"
+        p3=0
+        l=3
+        c3=0
+        for i=0 to len(arr2)
+            if arr3<arr2
+               p3=p3+1
+               c3=c3+1
+           else
+               p2=p2+1
+               c2=c2+1
+            end if
+            i=i+1
+       end for
+  end if
+    if l<c2
+        l=2
+        if v=1
+            percent=p2/(p1+p2)
+        else
+            percent=p2/(p2+p3)
+        end if
+        percent=percent*100
+        print "C2 beats Cv by "  percent "%"
+    else
+        if v=1
+            percent=p1/(p1+p2)
+        else
+            percent=p3/(p2+p3)
+        end if
+        percent=percent*100
+        print "Cv beats C2 by "  percent "%"
+    end if
+end
